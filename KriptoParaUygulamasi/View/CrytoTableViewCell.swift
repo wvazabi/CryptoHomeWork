@@ -7,8 +7,8 @@
 
 import UIKit
 
-class HomepageCell: UICollectionViewCell {
-    let currencyLabel: UILabel = {
+class TableViewCell: UICollectionViewCell {
+    let myCryptoCurrencyLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.textColor = .black
@@ -18,7 +18,7 @@ class HomepageCell: UICollectionViewCell {
         return label
     }()
 
-    let priceLabel: UILabel = {
+    let myCryptoPriceLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.textColor = .black
@@ -28,40 +28,22 @@ class HomepageCell: UICollectionViewCell {
         return label
     }()
 
-    private func addView() {
-        backgroundColor = .clear
-        addSubview(priceLabel)
-        addSubview(currencyLabel)
-
-        // Apply constraints with meaningful constant values
-        let padding: CGFloat = 10
-        let labelHeight: CGFloat = 200
-        currencyLabel.topAnchor.constraint(equalTo: topAnchor, constant: padding).isActive = true
-        currencyLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        currencyLabel.heightAnchor.constraint(equalToConstant: labelHeight).isActive = true
-        currencyLabel.widthAnchor.constraint(equalToConstant: labelHeight).isActive = true
-
-        priceLabel.topAnchor.constraint(equalTo: currencyLabel.bottomAnchor, constant: padding).isActive = true
-        priceLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: padding).isActive = true
-        priceLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -padding).isActive = true
-        priceLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding).isActive = true
-        priceLabel.heightAnchor.constraint(equalToConstant: labelHeight).isActive = true
-    }
+    
 
     func setup(indexPath: IndexPath, cryptos: [Crypto]) {
         if let price = Double(cryptos[indexPath.row].price) {
-            priceLabel.text = formatPrice(price)
+            myCryptoPriceLabel.text = formatPrice(price)
             
             if price > 0.01 {
-                priceLabel.textColor = .blue
+                myCryptoPriceLabel.textColor = .blue
             } else {
-                priceLabel.textColor = .black
+                myCryptoPriceLabel.textColor = .black
             }
         }
         
-        currencyLabel.text = cryptos[indexPath.row].currency
+        myCryptoCurrencyLabel.text = cryptos[indexPath.row].currency
 
-        currencyLabel.backgroundColor = ["BTC", "ETH", "USDT"].contains(cryptos[indexPath.row].currency) ? .red : .green
+        myCryptoCurrencyLabel.backgroundColor = ["BTC", "ETH", "USDT"].contains(cryptos[indexPath.row].currency) ? .red : .green
     }
 
 
@@ -76,6 +58,27 @@ class HomepageCell: UICollectionViewCell {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    private func addView() {
+        backgroundColor = .clear
+        var refreshSpace: CGFloat = 10
+        var height: CGFloat = 200
+        addSubview(myCryptoPriceLabel)
+        addSubview(myCryptoCurrencyLabel)
+
+       
+        myCryptoCurrencyLabel.topAnchor.constraint(equalTo: topAnchor, constant: refreshSpace).isActive = true
+        myCryptoCurrencyLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        myCryptoCurrencyLabel.heightAnchor.constraint(equalToConstant: height).isActive = true
+        myCryptoCurrencyLabel.widthAnchor.constraint(equalToConstant: height).isActive = true
+
+        myCryptoPriceLabel.topAnchor.constraint(equalTo: myCryptoCurrencyLabel.bottomAnchor, constant: refreshSpace).isActive = true
+        myCryptoPriceLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: refreshSpace).isActive = true
+        myCryptoPriceLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -refreshSpace).isActive = true
+        myCryptoPriceLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -refreshSpace).isActive = true
+        myCryptoPriceLabel.heightAnchor.constraint(equalToConstant: height).isActive = true
     }
 }
 

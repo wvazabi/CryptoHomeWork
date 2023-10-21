@@ -45,12 +45,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         view.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            label.leftAnchor.constraint(equalTo: view.leftAnchor),
-            label.rightAnchor.constraint(equalTo: view.rightAnchor),
-            label.heightAnchor.constraint(equalToConstant: 100)
-        ])
+  
+label.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+    label.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+    label.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+    label.heightAnchor.constraint(equalToConstant: 100).isActive = true
+
     }
     
     func collectionViewFunc(){
@@ -62,19 +62,19 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         layout.itemSize = CGSize(width: 200, height: 100)
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView?.register(HomepageCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView?.register(TableViewCell.self, forCellWithReuseIdentifier: "tableViewCell")
         collectionView?.backgroundColor = .white
         collectionView?.showsHorizontalScrollIndicator = false
         collectionView?.showsVerticalScrollIndicator = false
         
         view.addSubview(collectionView!)
-        collectionView?.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            collectionView!.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
-            collectionView!.leftAnchor.constraint(equalTo: view.leftAnchor),
-            collectionView!.rightAnchor.constraint(equalTo: view.rightAnchor),
-            collectionView!.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+collectionView?.translatesAutoresizingMaskIntoConstraints = false
+
+    collectionView!.topAnchor.constraint(equalTo: view.topAnchor, constant: 10).isActive = true
+collectionView!.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+    collectionView!.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+    collectionView!.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
         collectionView?.delegate = self
         collectionView?.dataSource = self
     }
@@ -86,7 +86,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! HomepageCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "tableViewCell", for: indexPath) as! TableViewCell
         cell.setup(indexPath: indexPath, cryptos: cryptoList ?? [])
         return cell
     }
