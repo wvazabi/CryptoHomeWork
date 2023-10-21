@@ -11,7 +11,7 @@ Manages data streaming using RxSwift and RxCocoa.
 
 
 ## Screenshot
-![crypto](assets/ss1.png)
+![crypto](assests/ss1.png)
 
 
 
